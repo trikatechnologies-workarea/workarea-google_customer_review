@@ -2,4 +2,4 @@
 
 :javascript
 
-	window.renderOptIn = function() { window.gapi.load('surveyoptin', function() { window.gapi.surveyoptin.render( { "merchant_id": 168637987, "order_id": "#{@order&.id}", "email": "#{@order&.email}", "delivery_country": "#{@order&.shipping_address&.country&.country_code}", "estimated_delivery_date": "#{@order&.estimated_delivery&.first}" }); }); }
+	window.renderOptIn = function() { window.gapi.load('surveyoptin', function() { window.gapi.surveyoptin.render( { "merchant_id": 168637987, "order_id": "#{@order&.id}", "email": "#{@order&.email}", "delivery_country": "#{@order&.shipping_address&.country&.country_code rescue nil}", "estimated_delivery_date": "#{@order&.estimated_delivery&.first}" }); }); }
