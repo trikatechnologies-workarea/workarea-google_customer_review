@@ -1,5 +1,6 @@
-%script{ src: "https://apis.google.com/js/platform.js?onload=renderOptIn", async: true, defer: true}
+- if @order.shipping_address.present?
+  %script{ src: "https://apis.google.com/js/platform.js?onload=renderOptIn", async: true, defer: true}
 
-:javascript
+  :javascript
 
-	window.renderOptIn = function() { window.gapi.load('surveyoptin', function() { window.gapi.surveyoptin.render( { "merchant_id": 168637987, "order_id": "#{@order&.id}", "email": "#{@order&.email}", "delivery_country": "#{@order&.country_code}", "estimated_delivery_date": "#{@order&.estimated_delivery&.first}" }); }); }
+  	window.renderOptIn = function() { window.gapi.load('surveyoptin', function() { window.gapi.surveyoptin.render( { "merchant_id": 168637987, "order_id": "#{@order&.id}", "email": "#{@order&.email}", "delivery_country": "#{@order&.shipping_address&.try(:country)&.try(:country_code)}", "estimated_delivery_date": "#{@order&.estimated_delivery&.first}" }); }); }
